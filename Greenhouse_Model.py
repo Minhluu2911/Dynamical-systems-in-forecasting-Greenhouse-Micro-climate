@@ -7,7 +7,6 @@ import read_data
 # ===============================================================
 data_Tout, wind_speed, data_Tair = read_data.read_data("meteo.csv", "Greenhouse_climate.csv")
 
-
 # ===============================================================
 # Greenhouse Model
 # ===============================================================
@@ -244,12 +243,12 @@ class GreenHouse:
         return U_ExtCO2 * phi_ExtCO2 / A_Flr
 
     def MC_PadAir(self):
-        # Mo hinh dang xet khong co he thong quat gio
+        # do not have PadAir with our model
         f_Pad = self.f_Pad()
         return f_Pad * (self.Weather.CO2_Out - self.CO2_Air)
 
     def MC_AirTop(self):
-        f_ThScr = self.f_ThScr(1)
+        f_ThScr = self.f_ThScr()
         return self.air_flux(f_ThScr, self.CO2_Air, self.CO2_Top)
 
     def MC_AirOut(self):
@@ -300,7 +299,7 @@ class GreenHouse:
 
     def MV_AirTop(self):
         # Equation 8.45
-        f_ThScr = self.f_ThScr(0)
+        f_ThScr = self.f_ThScr()
         VP_Air = self.ClimateStates.VP_Air
         T_Air = self.ClimateStates.T_Air
         VP_Top = self.ClimateStates.VP_Top
@@ -414,7 +413,7 @@ class GreenHouse:
         # Equation 8.45
         return self.Constant.M_WATER / self.Constant.M_GAS * f * (VP_from / (T_from + 273.15) - VP_to / (T_to + 273.15))
 
-    def f_ThScr(self,input_):
+    def f_ThScr(self):
         # Equation 8.41
         U_ThScr = self.Assuming.U_ThScr
         K_ThScr = self.Coefficients.Thermalscreen.K_ThScr
@@ -477,7 +476,7 @@ class GreenHouse:
     def eta_InsScr(self):
         # Equation 8.70
         eta_InsScr = self.Coefficients.Ventilation.eta_InsScr
-        return eta_InsScr * (2 - eta_InsScr)
+        return eta_InsScr * (1 - eta_InsScr)
 
     def f_leakage(self):
         # Equation 8.71
