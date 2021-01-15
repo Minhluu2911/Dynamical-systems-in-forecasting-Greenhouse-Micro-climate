@@ -2,49 +2,47 @@ import numpy as np
 import matplotlib.pyplot as plt
 
 
-def dydx(x, y):
-    return -x / (y - 3)
+def dydt(t, y):
+    return -t / (y - 3)
 
-
-def rungeKutta(x0, x, y0, h):
+def rungeKutta(t0, t, y0, h):
     # Count number of iterations using step size or
     # step height h
-    n = (int)((x - x0) / h)
+    n = int((t - t0) / h)
     # Iterate for number of iterations
-    y = y0
-    x_result = []
+    t_result = []
     y_result = []
-    x_result.append(x0)
-    y_result.append(y)
+    t_result.append(t0)
+    y_result.append(y0)
     for i in range(1, n + 1):
-        k1 = dydx(x0, y)
-        k2 = dydx(x0 + 0.5 * h, y + 0.5 * k1 * h)
-        k3 = dydx(x0 + 0.5 * h, y + 0.5 * k2 * h)
-        k4 = dydx(x0 + h, y + k3 * h)
+        k1 = dydt(t0, y0)
+        k2 = dydt(t0 + 0.5 * h, y0 + 0.5 * k1 * h)
+        k3 = dydt(t0 + 0.5 * h, y0 + 0.5 * k2 * h)
+        k4 = dydt(t0 + h, y0 + k3 * h)
 
         # Update next value of y
-        y = y + (1.0 / 6.0) * (k1 + 2 * k2 + 2 * k3 + k4) * h
-        y_result.append(y)
-        # Update next value of x
-        x0 = x0 + h
-        x_result.append(x0)
-    return x_result, y_result
+        y0 = y0 + (1.0 / 6.0) * (k1 + 2 * k2 + 2 * k3 + k4) * h
+        y_result.append(y0)
+        # Update next value of t
+        t0 = t0 + h
+        t_result.append(t0)
+    return t_result, y_result
 
-x_exact = np.linspace(0,2,100)
-y_exact = 3 - (4-x_exact**2)**0.5
-
-
-x_1, y_1 = rungeKutta(0,2,1,0.4)
-x_2, y_2 = rungeKutta(0,2,1,0.2)
-x_3, y_3 = rungeKutta(0,2,1,0.1)
+t_exact = np.linspace(0,2,100)
+y_exact = 3 - (4-t_exact**2)**0.5
 
 
-plt.plot(x_exact,y_exact,'-', linewidth=2)
-plt.plot(x_1,y_1,'-',linewidth=2)
-plt.plot(x_2,y_2,'-',linewidth=2)
-plt.plot(x_3,y_3,'-',linewidth=2)
-plt.xlabel('xlabel')
-plt.ylabel('ylabel')
-plt.title('Differential Equation: dy/dx=x/(y-3), y(0) = 1 ')
+t_1, y_1 = rungeKutta(0,2,1,0.4)
+t_2, y_2 = rungeKutta(0,2,1,0.2)
+t_3, y_3 = rungeKutta(0,2,1,0.1)
+
+
+plt.plot(t_exact,y_exact,'-', linewidth=2)
+plt.plot(t_1,y_1,'-',linewidth=2)
+plt.plot(t_2,y_2,'-',linewidth=2)
+plt.plot(t_3,y_3,'-',linewidth=2)
+plt.xlabel('t')
+plt.ylabel('y')
+plt.title('Differential Equation: dy/dt=-t/(y-3), y(0) = 1 ')
 plt.legend(["Exact Solution","h = 0.4","h = 0.2","h = 0.1"])
 plt.show()
