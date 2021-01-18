@@ -582,8 +582,8 @@ if __name__ == '__main__':
     plt.title("CO2")
     plt.xlabel("Step : 5 min")
     plt.ylabel("Concentration of C02 (mg m^-3)")
-    plt.plot(data_CO2air[:N], color="#447766")
-    plt.plot(predict_CO2air, color="#FB0000", linewidth=2)
+    plt.plot(data_CO2air[:N], color="#4aff02")
+    plt.plot(predict_CO2air, color="#ff024a", linewidth=2)
     plt.legend(["Reality", "Predict"])
 
     # plot VP
@@ -591,8 +591,8 @@ if __name__ == '__main__':
     plt.title("Vapor Pressure")
     plt.ylabel("Vapor Pressure (Pa)")
     plt.xlabel("Step : 5 min")
-    plt.plot(data_VPAir[:N], color="#01FB00")
-    plt.plot(predict_VPair, color="#FB0000", linewidth=2)
+    plt.plot(data_VPAir[:N], color="#4aff02")
+    plt.plot(predict_VPair, color="#ff024a", linewidth=2)
     plt.legend(["Reality", "Predict"])
 
     plt.show()
