@@ -572,7 +572,7 @@ if __name__ == '__main__':
     print("Root Mean Squared Error of CO2: ", RMSE_CO2)
 
     RMSE_VP = 0
-    for VP_pre, VP in zip(predict_VPair, data_CO2air[:N]):
+    for VP_pre, VP in zip(predict_VPair, data_VPAir[:N]):
         RMSE_VP += (VP - VP_pre) ** 2
     RMSE_VP = (RMSE_VP / N) ** (1 / 2)
     print("Root Mean Squared Error of Vapor Pressure: ", RMSE_VP)
