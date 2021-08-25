@@ -1,2 +1,0 @@
-Place,cover_area,floor_area,greenhouse_height,cap_CO2Air,roof_ventilation_area,side_ventilation_area,elevation_height,c_HECin,C_d,C_w,eta_InsScr,c_leakage,h_SideRoof,h_Vent,P_Blow,phi_ExtCO2,phi_Pad,phi_Fog,COP_MechCool,P_MechCool,K_ThScr,eta_CO2_AirStom,CO2_Air,CO2_Out,VP_Air
-Texas,80000,70000,5.3,4.7,14040,0,1470,1.86,0.65,0.09,1,0.0001,0,0.97,0,430000,0,0,0,0,0.00025,0.67,440,440,2300
